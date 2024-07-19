@@ -1,0 +1,21 @@
+course_name,description,level,url,duration,platform,category
+Introduction to Python,"Learn the basics of Python programming.",Intern to Junior,https://www.coursera.org/learn/python,4 weeks,Coursera,Python
+Python Data Structures,"Understand and implement various data structures in Python.",Intern to Junior,https://www.udacity.com/course/python-data-structures,5 weeks,Udacity,Python
+Python for Data Science,"Use Python for data analysis and visualization.",Junior to Mid,https://www.edx.org/course/python-for-data-science,6 weeks,edX,Python
+Advanced Python Programming,"Dive deep into advanced Python topics and techniques.",Junior to Mid,https://www.udemy.com/course/advanced-python-programming,7 weeks,Udemy,Python
+Python Machine Learning,"Learn how to implement machine learning algorithms using Python.",Mid to Senior,https://www.coursera.org/learn/python-machine-learning,8 weeks,Coursera,Python
+Java Programming Basics,"Start your journey with Java programming.",Intern to Junior,https://www.coursera.org/learn/java-programming,4 weeks,Coursera,Java
+Object-Oriented Programming in Java,"Master the principles of object-oriented programming in Java.",Intern to Junior,https://www.udacity.com/course/oop-java,5 weeks,Udacity,Java
+Java Data Structures and Algorithms,"Learn data structures and algorithms with Java.",Junior to Mid,https://www.edx.org/course/java-data-structures-algorithms,6 weeks,edX,Java
+Advanced Java Programming,"Explore advanced Java programming concepts.",Junior to Mid,https://www.udemy.com/course/advanced-java,7 weeks,Udemy,Java
+Java for Enterprise Applications,"Develop enterprise applications using Java.",Mid to Senior,https://www.coursera.org/learn/java-enterprise,8 weeks,Coursera,Java
+Introduction to AI,"Understand the basics of artificial intelligence.",Intern to Junior,https://www.coursera.org/learn/ai,4 weeks,Coursera,AI
+AI for Everyone,"Learn the fundamentals of AI and its applications.",Intern to Junior,https://www.udacity.com/course/ai-for-everyone,5 weeks,Udacity,AI
+Machine Learning with Python,"Implement machine learning algorithms using Python.",Junior to Mid,https://www.edx.org/course/machine-learning-python,6 weeks,edX,AI
+Deep Learning Specialization,"Master deep learning techniques and applications.",Junior to Mid,https://www.udemy.com/course/deep-learning-specialization,7 weeks,Udemy,AI
+AI for Business Leaders,"Learn how AI can be applied in business contexts.",Mid to Senior,https://www.coursera.org/learn/ai-business,8 weeks,Coursera,AI
+Python for Senior Engineers,"Advanced Python techniques for senior engineers.",Mid/Senior to Senior,https://www.udemy.com/course/python-senior-engineers,8 weeks,Udemy,Python
+AI Strategy and Leadership,"Lead AI projects and strategies in your organization.",Mid/Senior to Senior,https://www.coursera.org/learn/ai-strategy-leadership,10 weeks,Coursera,AI
+Advanced Java Performance Tuning,"Optimize and tune Java applications for high performance.",Mid/Senior to Senior,https://www.edx.org/course/advanced-java-performance-tuning,7 weeks,edX,Java
+Executive Data Science,"Master data science at an executive level.",Mid/Senior to Senior,https://www.coursera.org/learn/executive-data-science,9 weeks,Coursera,AI
+AI in Business Decision Making,"Integrate AI into strategic business decisions.",Mid/Senior to Senior,https://www.udacity.com/course/ai-business-decision-making,10 weeks,Udacity,AI
