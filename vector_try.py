@@ -41,11 +41,10 @@ for i, vector in enumerate(vectors):
     current_vector = [float(element) for element in vector]
 
     user_id = 'user123'
-    index.upsert([(user_id, current_vector)])
-    # Insert vectors into Pinecone index
+    vector_id = f"user123_vector_{i+1}"
+    # Correctly insert vectors into Pinecone index using the index object
     try:
-        index.upsert([(user_id, current_vector)])
-        Pinecone.upsert_items(index_name, vector)
+        index.upsert([(vector_id, current_vector)])
         print(f"Successfully inserted {len(vector)} vectors into '{index_name}' index.")
     except Exception as e:
         print(f"Vector insertion failed: {e}")
