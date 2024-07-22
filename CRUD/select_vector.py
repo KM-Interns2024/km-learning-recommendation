@@ -9,7 +9,7 @@ def query_vector(vector):
     vector = list(map(float, vector_input.split(',')))
 
     results = index.query(
-        namespace="",
+        namespace="employees",
         vector=vector,
         top_k=3,
         include_values=True
@@ -19,7 +19,7 @@ def query_vector(vector):
 
 def query_id(vector_id):
     results = index.query(
-        namespace="",
+        namespace="employees",
         id=vector_id,
         top_k=3,
         include_values=True

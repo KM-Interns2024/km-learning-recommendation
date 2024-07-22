@@ -13,8 +13,9 @@ def delete_all():
         print(f"Failed to delete entries: {e}")
 
 def delete_entry():
+    namespace = "employees"
     entry_id = input("Enter the ID of the entry you want to delete: ")
-    index.delete(ids=[entry_id])
+    index.delete(ids=[entry_id], namespace=namespace)
     print(f"Entry with ID '{entry_id}' has been deleted.")
 
 # delete_all()
