@@ -34,6 +34,16 @@ def query_vector_id(vector_id):
 
     return results
 
+def query_vector_id_courses(vector_id, metatada):
+    results = index.query(
+        id=vector_id,
+        metatada=metatada,
+        top_k=3,
+        include_values=True
+    )
+    
+    return results
+
 def delete_all():
     
     namespace = "employees"

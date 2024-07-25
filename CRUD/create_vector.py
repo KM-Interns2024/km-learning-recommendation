@@ -105,7 +105,7 @@ def insert_courses():
         # Correctly insert vectors into Pinecone index using the index object
         if vector_id is not None:
             try:
-                index.upsert([(vector_id, current_vector, metadata)],namespace="courses")
+                index.upsert([(vector_id, current_vector, metadata)])
                 print(f"Successfully inserted vector for '{vector_id}' into '{index_name}' index.")
             except Exception as e:
                 print(f"Vector insertion failed for '{vector_id}': {e}")
@@ -124,10 +124,22 @@ csv_positions = '../employees.csv'
 positions = vectorize_skills(csv_positions)
 
 # Create a Pinecone index
+if 'kbc' not in pc.list_indexes().names():
+    pc.create_index(
+        name='kbc',
+        dimension=16,
+        metric='euclidean',
+        spec=ServerlessSpec(
+            cloud='aws',
+            region='us-east-1'
+        )
+    )
+
+# Create a Pinecone index
 if 'courses' not in pc.list_indexes().names():
     pc.create_index(
         name='courses',
-        dimension=16,
+        dimension=1,
         metric='euclidean',
         spec=ServerlessSpec(
             cloud='aws',

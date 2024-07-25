@@ -4,8 +4,10 @@ pc = Pinecone(api_key="833ea798-e4a0-4ea8-94ae-c327e20b15a7")
 index = pc.Index("kbc")
 
 def delete_all():
+    index = pc.Index(input("What is the index?"))
+
     # Specify the correct namespace or omit if using the default
-    namespace = "employees"  # Replace 'your_namespace' with your actual namespace or leave it as an empty string for the default namespace
+    namespace = input("What is the index?")  # Replace 'your_namespace' with your actual namespace or leave it as an empty string for the default namespace
     try:
         index.delete(delete_all=True, namespace=namespace)
         print("All entries deleted successfully.")
@@ -18,5 +20,5 @@ def delete_entry():
     index.delete(ids=[entry_id], namespace=namespace)
     print(f"Entry with ID '{entry_id}' has been deleted.")
 
-# delete_all()
-delete_entry()
+delete_all()
+# delete_entry()
