@@ -56,5 +56,66 @@ def main():
         print(f"Description: {course['description']}")
         print(f"URL: {course['url']}\n")
 
+
+
+
+
+
+
+
+
+
+
+
+from CRUD.select_vector import query_id
+from pinecone import Pinecone, ServerlessSpec
+
+pc = Pinecone(api_key="833ea798-e4a0-4ea8-94ae-c327e20b15a7")
+index = pc.Index("kbc")
+
+skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", "PHP", "Swift", "Objective-C", "R", "Perl", "Scala", "Go", "HTML", "CSS"]
+
+# def course_rec(vector, loop_index):
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+def compare_values():
+    pc = Pinecone(api_key="833ea798-e4a0-4ea8-94ae-c327e20b15a7")
+    index = pc.Index("kbc")
+
+    skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", "PHP", "Swift", "Objective-C", "R", "Perl", "Scala", "Go", "HTML", "CSS"]
+
+    position_vec = query_id()
+    worker_vec = query_id()
+    counter = 0
+
+    for i in range(len(position_vec)):
+        if(position_vec[i] > worker_vec[i]):
+            course_rec(position_vec, i)
+
+
+
+
+
+
+
+
+
+
+
 if __name__ == "__main__":
     main()

@@ -8,6 +8,9 @@ index = pc.Index("kbc")
 skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", 
           "PHP", "Swift", "Objective-C", "R", "Perl", "Scala", "Go", "HTML", "CSS"]
 
+
+
+
 def query_vector(vector):
     vector_input = vector
     vector = list(map(float, vector_input.split(',')))

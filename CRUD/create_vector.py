@@ -25,22 +25,10 @@ def vectorize_skills(csv_file):
             vectors.append(skills_vector)
     return vectors
 
-# Opens CSV and vectorises data
-def vectorize_skills_courses(csv_file):
-    with open(csv_file, newline='') as csvfile:
-        reader = csv.DictReader(csvfile)
-        skills = reader.fieldnames[7:]  # Assuming skills start from the 4th column
-        vectors = []
-        for row in reader:
-            skills_vector = [float(row[skill]) for skill in skills]
-            vectors.append(skills_vector)
-    return vectors
-
-
 # Insert employees vectors into Pinecone index
 def insert_employees():
-    for i, vector in enumerate(employees_vectors):
-        vector_id = add_name_id("../employees_vectors.csv", i)
+    for i, vector in enumerate(employees):
+        vector_id = add_name_id(f"../employees.csv", i)
         print(f"Person {vector_id}")
         # Create a Pinecone index
         index_name = 'kbc'
@@ -59,8 +47,8 @@ def insert_employees():
 
 # Insert positions vectors into Pinecone index
 def insert_positions():
-    for i, vector in enumerate(positions_vectors):
-        vector_id = add_name_id("../positions_vectors.csv", i)
+    for i, vector in enumerate(positions):
+        vector_id = add_name_id("../positions.csv", i)
         print(f"Position {vector_id}")
         # Create a Pinecone index
         index_name = 'kbc'
@@ -77,20 +65,47 @@ def insert_positions():
         else:
             print(f"No name found for vector at index {i+1}; vector not inserted.")
 
+def add_metadata():
+    csvfile = "../courses.csv"
+    with open(csvfile, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        technologies = reader.fieldnames[5:]  # Assuming skills start from the 4th column
+        metadata_list = []
+        for row in reader:
+            # Convert to dictionary
+            technologies_dict = {tech: row[tech] for tech in technologies}
+            metadata_list.append(technologies_dict)
+    return metadata_list
+
+
+def vectorise_courses():
+    csvfile = "../courses.csv"
+    with open(csvfile, newline='') as csvfile:
+        reader = csv.DictReader(csvfile)
+        skills = reader.fieldnames[4:5]  # Assuming skills start from the 4th column
+        vectors = []
+        for row in reader:
+            skills_vector = [float(row[skill]) for skill in skills]
+            vectors.append(skills_vector)
+    return vectors
+
 # Insert courses vectors into Pinecone index
 def insert_courses():
-    for i, vector in enumerate(employees_vectors):
+    vector = vectorise_courses()
+    metadata_list = add_metadata()
+    for i, vector in enumerate(vector):
         vector_id = add_name_id("../courses.csv", i)
+        metadata = metadata_list[i]
         print(f"Course {vector_id}")
         # Create a Pinecone index
-        index_name = 'kbc'
+        index_name = 'courses'
         index = pc.Index(index_name)
         current_vector = [float(element) for element in vector]
 
         # Correctly insert vectors into Pinecone index using the index object
         if vector_id is not None:
             try:
-                index.upsert([(vector_id, current_vector)],namespace="courses")
+                index.upsert([(vector_id, current_vector, metadata)],namespace="courses")
                 print(f"Successfully inserted vector for '{vector_id}' into '{index_name}' index.")
             except Exception as e:
                 print(f"Vector insertion failed for '{vector_id}': {e}")
@@ -102,27 +117,24 @@ def insert_courses():
 
 
 
-csv_employees = '../employees_vectors.csv'
-employees_vectors = vectorize_skills(csv_employees)
+csv_employees = '../employees.csv'
+employees = vectorize_skills(csv_employees)
 
-csv_positions = '../employees_vectors.csv'
-positions_vectors = vectorize_skills(csv_positions)
-
-csv_courses = '../courses.csv'
-courses_vectors = vectorize_skills_courses(csv_courses)
+csv_positions = '../employees.csv'
+positions = vectorize_skills(csv_positions)
 
 # Create a Pinecone index
-if 'kbc' not in pc.list_indexes().names():
+if 'courses' not in pc.list_indexes().names():
     pc.create_index(
-        name='kbc',
+        name='courses',
         dimension=16,
-        metric='cosine',
+        metric='euclidean',
         spec=ServerlessSpec(
             cloud='aws',
             region='us-east-1'
         )
     )
 
-insert_employees()
-insert_positions()
+# insert_employees()
+# insert_positions()
 insert_courses()
