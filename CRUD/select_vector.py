@@ -51,8 +51,3 @@ def query_course_rec(vector, metadata):
         lista.append(result.get('id'))
 
     return lista
-
-# print("Query results:", query_vector_id_courses())
-# print("Query results:", query_vector())
-# print("Query results:", query_id(input("What is the position? ")))
-# print("Query results: ", query_course_rec)

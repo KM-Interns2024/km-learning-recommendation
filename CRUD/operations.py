@@ -1,8 +1,9 @@
 from pinecone import Pinecone
 import numpy as np
+from misc.api_key import api_key
 
 
-pc = Pinecone(api_key="833ea798-e4a0-4ea8-94ae-c327e20b15a7")
+pc = Pinecone(api_key=api_key)
 index = pc.Index("kbc")
 
 skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", 
@@ -11,18 +12,16 @@ skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby",
 
 
 
-def query_vector(vector):
-    vector_input = vector
-    vector = list(map(float, vector_input.split(',')))
-
+def query_id(namespace):
+    vector_id = input("What is the ID of the vector you would like to query? ")
     results = index.query(
-        namespace="employees",
-        vector=vector,
-        top_k=3,
+        namespace=namespace,
+        id=vector_id,
+        top_k=1,
         include_values=True
-    )
+    ).get("matches")
 
-    return results
+    return results[0].get("values")
 
 def query_vector_id(vector_id):
     results = index.query(
@@ -30,22 +29,11 @@ def query_vector_id(vector_id):
         id=vector_id,
         top_k=3,
         include_values=True
-    )
+    ).get('matches')
 
-    return results
-
-def query_vector_id_courses(vector_id, metatada):
-    results = index.query(
-        id=vector_id,
-        metatada=metatada,
-        top_k=3,
-        include_values=True
-    )
-    
     return results
 
 def delete_all():
-    
     namespace = "employees"
     try:
         index.delete(delete_all=True, namespace=namespace)
@@ -53,18 +41,17 @@ def delete_all():
     except Exception as e:
         print(f"Failed to delete entries: {e}")
 
-def delete_entry():
+def delete_vector_by_id():
     namespace = "employees"
     entry_id = input("Enter the ID of the entry you want to delete: ")
     index.delete(ids=[entry_id], namespace=namespace)
     print(f"Entry with ID '{entry_id}' has been deleted.")
 
-def vector_update():
-    index_name = "kbc"
-    index = pc.Index(index_name)
+def update_vector():
+
     namespace = input("Enter your namespace: ")
     id = input("Enter the vector id you want to update: ")
-    dimension = pc.describe_index(str(index_name)).get('dimension')
+    dimension = pc.describe_index('kbc').get('dimension')
     list = []
 
     for el in range(dimension):
@@ -75,3 +62,8 @@ def vector_update():
     
     index.update(id, list, namespace=namespace)
     return list
+
+def get_vector_values_by_id(id):
+    result = index.fetch([f'{id}']).get('values')
+    values = result[id]['values']
+    return values
