@@ -1,7 +1,8 @@
 import csv
 from pinecone import Pinecone, ServerlessSpec
+from misc.api_key import api_key
 
-pc = Pinecone(api_key="833ea798-e4a0-4ea8-94ae-c327e20b15a7")
+pc = Pinecone(api_key=api_key)
 index = pc.Index("kbc")
 
 skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", "PHP", "Swift", "Objective-C", "R", "Perl", "Scala", "Go", "HTML", "CSS"]

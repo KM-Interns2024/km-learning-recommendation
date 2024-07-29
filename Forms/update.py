@@ -1,10 +1,10 @@
-import tkinter as tk
+import customtkinter as tk
 from functions import *
 
-root = tk.Tk()
-init(root, "Update")
+app = tk.CTk()
+init(app, "Update")
 
-goto(root, "main.py", "Go To Main page")
+goto(app, "main.py", "Go To Main page")
 
 
-root.mainloop()
+app.mainloop()
