@@ -31,5 +31,21 @@ def get_vector_values_by_id(index_name, id):
     index = pc.Index(index_name)
     result = index.fetch([f'{id}']).get('values')
     values = result[id]['values']
-    
+
     return values
+
+
+def query_course_rec(vector, metadata):
+    index = pc.Index("courses")
+    results = index.query(
+        vector=vector,
+        filter={"Technology": metadata},
+        top_k=5,
+        include_values=True
+    ).get("matches")
+
+    list = []
+    for result in results:
+        list.append(result.get('id'))
+
+    return list

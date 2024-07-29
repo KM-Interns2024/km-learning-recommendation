@@ -7,7 +7,7 @@ pc = Pinecone(api_key=api_key)
 skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", 
           "PHP", "Swift", "Objective-C", "R", "Perl", "Scala", "Go", "HTML", "CSS"]
 
-#import skills in a separate file
+
 def update_vector(index_name, namespace, id):
     index = pc.Index(index_name)
     dimension = pc.describe_index(index_name).get('dimension')
