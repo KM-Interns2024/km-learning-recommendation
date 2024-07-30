@@ -13,7 +13,7 @@ def update_vector(index_name, namespace, id):
     dimension = pc.describe_index(index_name).get('dimension')
     list = []
 
-    for el in range(dimension):
+    for el in range(dimension): # el stands for element
         temp = float(input(f"Please enter a value for {skills[el]}: "))
         while(temp < 0 or temp > 1):
             temp = float(input(f"Please enter a value between 0.0 and 1.0 for {skills[el]} : "))
