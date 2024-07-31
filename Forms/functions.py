@@ -18,7 +18,8 @@ finally:
 def init(app, title):
     app.title(f"{title}")
     app.geometry("400x200+700+400")
-    app.iconbitmap("../venv/Lib/site-packages/customtkinter/assets/icons/images.ico")
+    ctk.set_appearance_mode("dark")
+    # app.iconbitmap("../venv/Lib/site-packages/customtkinter/assets/icons/images.ico")
     app.resizable(False, False)
 
 def on_button_click(app, form):

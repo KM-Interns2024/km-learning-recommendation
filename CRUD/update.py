@@ -4,8 +4,7 @@ from misc.api_key import api_key
 
 pc = Pinecone(api_key=api_key)
 
-skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", 
-          "PHP", "Swift", "Objective-C", "R", "Perl", "Scala", "Go", "HTML", "CSS"]
+skills = ["Hard Skills", "Soft Skills"]
 
 
 def update_vector(index_name, namespace, id):

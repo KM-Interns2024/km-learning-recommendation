@@ -3,6 +3,7 @@ import os
 import csv
 from pinecone import Pinecone
 
+
 # Temporarily add the parent directory to the Python path
 original_sys_path = sys.path.copy()
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -37,7 +38,7 @@ def create_all():
     def kbc_vectorize_skills(csv_file):
         with open(csv_file, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
-            skills = reader.fieldnames[3:]  # Assuming skills start from the 4th column
+            skills = reader.fieldnames[5:]  # Assuming skills start from the 4th column
             vectors = []
             for row in reader:
                 skills_vector = [float(row[skill]) for skill in skills]

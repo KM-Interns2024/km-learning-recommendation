@@ -4,7 +4,7 @@ from functions import *
 app = tk.CTk()
 init(app, "Delete All")
 
-goto(app, "main.py", "Go To Main page")
+on_button_click(app, "main.py",)
 
 
 app.mainloop()

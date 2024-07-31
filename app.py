@@ -1,5 +1,5 @@
 import csv
-from CRUD.select_vector import query_id
+from CRUD.read import query_id
 from pinecone import Pinecone, ServerlessSpec
 
 
