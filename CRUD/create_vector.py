@@ -37,7 +37,7 @@ def create_all():
     def kbc_vectorize_skills(csv_file):
         with open(csv_file, newline='') as csvfile:
             reader = csv.DictReader(csvfile)
-            skills = reader.fieldnames[5:]  # Assuming skills start from the 4th column
+            skills = reader.fieldnames[3:5]  # Assuming skills start from the 4th column
             vectors = []
             for row in reader:
                 skills_vector = [float(row[skill]) for skill in skills]
