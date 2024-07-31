@@ -18,8 +18,7 @@ def create_all():
     pc = Pinecone(api_key=api_key)
     index = pc.Index("kbc")
 
-    skills = ["Python", "Java", "C++", "C", "C#", "JavaScript", "Ruby", "PHP", "Swift", "Objective-C", "R", "Perl", "Scala", "Go", "HTML", "CSS"]
-
+    skills = ["Hard", "Soft"]
     def add_name_id(filename, index):
         with open(filename, mode='r', encoding='utf-8') as file:
             csv_reader = csv.DictReader(file)

@@ -38,7 +38,7 @@ def get_vector_values_by_id(id): # !!!
 
 
 def query_course_rec(vector, metadata):
-    index = pc.Index("courses")
+    index = pc.Index(index_name)
     results = index.query(
         vector=vector,
         top_k=5,
