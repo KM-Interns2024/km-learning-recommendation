@@ -13,6 +13,7 @@ try:
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path
+
 def create_all():
     pc = Pinecone(api_key=api_key)
     index = pc.Index("kbc")

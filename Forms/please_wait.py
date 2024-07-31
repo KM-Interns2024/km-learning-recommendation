@@ -29,7 +29,7 @@ label = ctk.CTkLabel(app, text="Please wait for the window to close after confir
 label.place(relx=0.5, rely=0.4, anchor="center")
 
 
-button = ctk.CTkButton(app, text="yes", command=lambda: [create_all(), on_button_click(app, "main.py")])
+button = ctk.CTkButton(app, text="yes", command=lambda: [create_all(), on_button_click(app, "done.py")])
 button.place(relx=0.5, rely=0.7, anchor="center")
 
 
