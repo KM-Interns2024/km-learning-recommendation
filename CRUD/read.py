@@ -49,3 +49,27 @@ def query_course_rec(vector, metadata):
         list.append(result.get('id'))
 
     return list
+
+
+def query_all(namespace):
+    index = pc.Index(index_name)
+    results = index.query(
+        vector=[0.12,0.12],
+        namespace=namespace,
+        top_k=10000,
+        include_values=True,
+        include_metadata=True
+    ).get("matches")
+
+    output = ""
+    for result in results:
+        if namespace == "positions":
+
+            entity_id = result.get('id')
+            output += f"{entity_id}\n"
+        else:
+            entity_id = result.get('id')
+            meta = result.get('metadata')
+            output += f"{entity_id} {' '.join(meta.values())}\n"
+
+    return output

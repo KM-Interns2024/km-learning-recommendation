@@ -82,7 +82,6 @@ def create_all():
                 else:
                     print(f"No name found for vector at index {i+1}; vector not inserted.")
 
-
     csv_employees = '../resources/employees.csv'
     employees = kbc_vectorize_skills(csv_employees)
 
