@@ -3,7 +3,6 @@ import os
 import csv
 from pinecone import Pinecone
 
-
 # Temporarily add the parent directory to the Python path
 original_sys_path = sys.path.copy()
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -21,6 +20,7 @@ def create_all():
     index = pc.Index("kbc")
 
     skills = ["Hard", "Soft"]
+
     def add_name_id(filename, index):
         with open(filename, mode='r', encoding='utf-8') as file:
             csv_reader = csv.DictReader(file)
@@ -28,6 +28,17 @@ def create_all():
                 if i == index:  # Match the row in the CSV to the current vector index
                     return row['Name'] + "_" + row['Level']
         return None  # Return None or a default value if no matching row is found
+
+    def get_metadata(filename):
+        with open(filename, newline='') as file:
+            reader = csv.DictReader(file)
+            metadata = reader.fieldnames[1:2]
+            metadata_list = []
+            for row in reader:
+                # Convert to dictionary
+                metadata_dict = {meta: row[meta] for meta in metadata}
+                metadata_list.append(metadata_dict)
+        return metadata_list
 
     # Opens CSV and vectorises data employees&positions
     def kbc_vectorize_skills(csv_file):
@@ -44,22 +55,33 @@ def create_all():
     def kbc_insert(component, strName):
         for i, vector in enumerate(component):
             vector_id = add_name_id(f"../resources/{strName}.csv", i)
+            metadata_iter = get_metadata(f"../resources/{strName}.csv")
             print(f"{strName} {vector_id}")
             # Create a Pinecone index
             index_name = 'kbc'
             index = pc.Index(index_name)
             current_vector = [float(element) for element in vector]
 
-            # Correctly insert vectors into Pinecone index using the index object
-            if vector_id is not None:
-                try:
-                    index.upsert([(vector_id, current_vector)],namespace=f"{strName}")
-                    print(f"Successfully inserted vector for '{vector_id}' into '{index_name}' index.")
-                except Exception as e:
-                    print(f"Vector insertion failed for '{vector_id}': {e}")
+            if (strName == 'positions'):
+                # Correctly insert vectors into Pinecone index using the index object
+                if vector_id is not None:
+                    try:
+                        index.upsert([(vector_id, current_vector)], namespace=f"{strName}")
+                        print(f"Successfully inserted vector for '{vector_id}' into '{index_name}' index.")
+                    except Exception as e:
+                        print(f"Vector insertion failed for '{vector_id}': {e}")
+                else:
+                    print(f"No name found for vector at index {i + 1}; vector not inserted.")
             else:
-                print(f"No name found for vector at index {i+1}; vector not inserted.")
-
+                # Correctly insert vectors into Pinecone index using the index object
+                if vector_id is not None:
+                    try:
+                        index.upsert([(vector_id, current_vector, metadata_iter)], namespace=f"{strName}")
+                        print(f"Successfully inserted vector for '{vector_id}' into '{index_name}' index.")
+                    except Exception as e:
+                        print(f"Vector insertion failed for '{vector_id}': {e}")
+                else:
+                    print(f"No name found for vector at index {i + 1}; vector not inserted.")
 
     csv_employees = '../resources/employees.csv'
     employees = kbc_vectorize_skills(csv_employees)
