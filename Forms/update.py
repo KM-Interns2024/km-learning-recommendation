@@ -13,14 +13,13 @@ button.place(relx=0.5, rely=0.8, anchor="center")
 namespace = ''
 def combo_box_callback(choice):
     print("Combobox dropdown clicked: ", choice)
-    if(choice == 'employee'):
+    if(choice.lower() == 'employee'):
         namespace = 'employees'
-    elif(choice == 'position'):
+    elif(choice.lower() == 'position'):
         namespace = 'positions'
     else:
         namespace = 'courses'
 
-    print(namespace)
     return namespace
     
 index_combo_box = ctk.CTkComboBox(master= app,
@@ -29,7 +28,23 @@ index_combo_box = ctk.CTkComboBox(master= app,
 
 index_combo_box.pack(padx=20, pady=10)
 index_combo_box.set("Employee")
+vector_id_text_box = ctk.CTkEntry(master= app,
+                                    width=140,
+                                    height=20,
+                                    placeholder_text='Enter vector id'
+                                )
+vector_id_text_box.pack(padx=10, pady=5)
 
-update_vector(index_name = 'kbc', namespace = namespace, id = vector_id)
+def get_entry_value():
+    value = vector_id_text_box.get()
+    return value
+ 
+result = get_entry_value()
+ 
+submit_button = ctk.CTkButton(app, text='Submit', corner_radius=32, hover_color="#0b3459",
+                               fg_color="transparent", border_color="#028fc4", border_width=2, width=140, 
+                               command=lambda: update_vector(index_name='kbc', namespace=namespace, id=result))
+submit_button.place(relx=0.5, rely=0.6, anchor="center")
+
 
 app.mainloop()
