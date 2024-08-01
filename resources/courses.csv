@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 894336c (Now its creating vectors with metadata and namespace)
 Name,Technology,Level,Hard,Soft,Category,url,description
 Introduction_to_Python_294353,Python,2,0.04,0.04,Hard,https://www.coursera.org/learn/python,"Learn the basics of Python programming."
 Python_Data_Structures_235478,Python,2,0.08,0.08,Soft,https://www.udacity.com/course/python-data-structures,"Understand and implement various data structures in Python."
@@ -20,6 +23,7 @@ AI_Strategy_and_Leadership_376529,AI,4,0.11,0.11,Soft,https://www.coursera.org/l
 Advanced_Java_Performance_Tuning_842361,Java,4,0.07,0.07,Soft,https://www.edx.org/course/advanced-java-performance-tuning,"Optimize and tune Java applications for high performance."
 Executive_Data_Science_597213,ML,4,0.09,0.09,Hard,https://www.coursera.org/learn/executive-data-science,"Master data science at an executive level."
 AI_in_Business_Decision_Making_748902,AI,4,0.12,0.12,Hard,https://www.udacity.com/course/ai-business-decision-making,"Integrate AI into strategic business decisions."
+<<<<<<< HEAD
 =======
 Name,description,Level,Hard,Soft,Category,url,
 Introduction_to_Python_294353,"Learn the basics of Python programming.",2,0.04,0.04,Hard,https://www.coursera.org/learn/python,
@@ -43,3 +47,5 @@ Advanced_Java_Performance_Tuning_842361,"Optimize and tune Java applications for
 Executive_Data_Science_597213,"Master data science at an executive level.",4,0.09,0.09,Hard,https://www.coursera.org/learn/executive-data-science,
 AI_in_Business_Decision_Making_748902,"Integrate AI into strategic business decisions.",4,0.12,0.12,Hard,https://www.udacity.com/course/ai-business-decision-making,
 >>>>>>> c2eba9c (testing)
+=======
+>>>>>>> 894336c (Now its creating vectors with metadata and namespace)
