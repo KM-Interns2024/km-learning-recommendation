@@ -1,5 +1,4 @@
 from pinecone import Pinecone
-import numpy as np
 from misc.api_key import api_key
 
 pc = Pinecone(api_key=api_key)
