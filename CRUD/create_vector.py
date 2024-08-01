@@ -146,4 +146,3 @@ def create_all():
     kbc_insert(positions, "positions")
     kbc_insert(courses, "courses")
 
-create_all()

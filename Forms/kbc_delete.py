@@ -1,4 +1,3 @@
-from pytube import *
 import customtkinter as ctk
 from functions import *
 
