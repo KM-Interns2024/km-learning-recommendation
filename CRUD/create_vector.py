@@ -3,7 +3,6 @@ import os
 import csv
 from pinecone import Pinecone
 
-
 # Temporarily add the parent directory to the Python path
 original_sys_path = sys.path.copy()
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
