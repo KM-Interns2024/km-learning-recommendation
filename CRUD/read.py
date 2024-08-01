@@ -1,4 +1,5 @@
 from pinecone import Pinecone
+<<<<<<< HEAD
 import os
 import sys
 
@@ -13,6 +14,9 @@ finally:
     # Restore the original sys.path
     sys.path = original_sys_path
 
+=======
+from misc.api_key import api_key
+>>>>>>> 2cff30e (merge changes with master branch)
 
 pc = Pinecone(api_key=api_key)
 index_name = 'kbc'
