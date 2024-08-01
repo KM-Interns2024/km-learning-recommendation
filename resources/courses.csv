@@ -1,21 +1,21 @@
-Name,description,Level,Hard,Soft,Category,url,
-Introduction_to_Python_294353,"Learn the basics of Python programming.",2,0.04,0.04,Hard,https://www.coursera.org/learn/python,
-Python_Data_Structures_235478,"Understand and implement various data structures in Python.",2,0.08,0.08,Soft,https://www.udacity.com/course/python-data-structures,
-Python_for_Data_Science_674921,"Use Python for data analysis and visualization.",3,0.10,0.10,Hard,https://www.edx.org/course/python-for-data-science,
-Advanced_Python_Programming_582134,"Dive deep into advanced Python topics and techniques.",3,0.07,0.07,Hard,https://www.udemy.com/course/advanced-python-programming,
-Python_Machine_Learning_759346,"Learn how to implement machine learning algorithms using Python.",3,0.10,0.10,Soft,https://www.coursera.org/learn/python-machine-learning,
-Java_Programming_Basics_431287,"Start your journey with Java programming.",2,0.04,0.04,Soft,https://www.coursera.org/learn/java-programming,
-Object-Oriented_Programming_in_Java_194735,"Master the principles of object-oriented programming in Java.",2,0.05,0.05,Soft,https://www.udacity.com/course/oop-java,
-Java_Data_Structures_and_Algorithms_846291,"Learn data structures and algorithms with Java.",3,0.08,0.08,Soft,https://www.edx.org/course/java-data-structures-algorithms,
-Advanced_Java_Programming_503927,"Explore advanced Java programming concepts.",3,0.06,0.06,Hard,https://www.udemy.com/course/advanced-java,
-Java_for_Enterprise_Applications_682135,"Develop enterprise applications using Java.",3,0.11,0.11,Hard,https://www.coursera.org/learn/java-enterprise,
-Introduction_to_AI_739562,"Understand the basics of artificial intelligence.",2,0.07,0.07,Hard,https://www.coursera.org/learn/ai,
-AI_for_Everyone_257846,"Learn the fundamentals of AI and its applications.",2,0.05,0.05,Soft,https://www.udacity.com/course/ai-for-everyone,
-Machine_Learning_with_Python_901274,"Implement machine learning algorithms using Python.",3,0.09,0.09,Hard,https://www.edx.org/course/machine-learning-python
-Deep_Learning_Specialization_492875,"Master deep learning techniques and applications.",3,0.10,0.10,Soft,https://www.udemy.com/course/deep-learning-specialization,
-AI_for_Business_Leaders_634982,"Learn how AI can be applied in business contexts.",3,0.11,0.11,Hard,https://www.coursera.org/learn/ai-business,
-Python_for_Senior_Engineers_125679,"Advanced Python techniques for senior engineers.",4,0.10,0.10,Hard,https://www.udemy.com/course/python-senior-engineers,
-AI_Strategy_and_Leadership_376529,"Lead AI projects and strategies in your organization.",4,0.11,0.11,Soft,https://www.coursera.org/learn/ai-strategy-leadership,
-Advanced_Java_Performance_Tuning_842361,"Optimize and tune Java applications for high performance.",4,0.07,0.07,Soft,https://www.edx.org/course/advanced-java-performance-tuning,
-Executive_Data_Science_597213,"Master data science at an executive level.",4,0.09,0.09,Hard,https://www.coursera.org/learn/executive-data-science,
-AI_in_Business_Decision_Making_748902,"Integrate AI into strategic business decisions.",4,0.12,0.12,Hard,https://www.udacity.com/course/ai-business-decision-making,
+Name,Technology,Level,Hard,Soft,Category,url,description
+Introduction_to_Python_294353,Python,2,0.04,0.04,Hard,https://www.coursera.org/learn/python,"Learn the basics of Python programming."
+Python_Data_Structures_235478,Python,2,0.08,0.08,Soft,https://www.udacity.com/course/python-data-structures,"Understand and implement various data structures in Python."
+Python_for_Data_Science_674921,Python,3,0.10,0.10,Hard,https://www.edx.org/course/python-for-data-science,"Use Python for data analysis and visualization."
+Advanced_Python_Programming_582134,Python,3,0.07,0.07,Hard,https://www.udemy.com/course/advanced-python-programming,"Dive deep into advanced Python topics and techniques."
+Python_Machine_Learning_759346,Python,3,0.10,0.10,Soft,https://www.coursera.org/learn/python-machine-learning,"Learn how to implement machine learning algorithms using Python."
+Java_Programming_Basics_431287,Java,2,0.04,0.04,Soft,https://www.coursera.org/learn/java-programming,"Start your journey with Java programming."
+Object-Oriented_Programming_in_Java_194735,Java,2,0.05,0.05,Soft,https://www.udacity.com/course/oop-java,"Master the principles of object-oriented programming in Java."
+Java_Data_Structures_and_Algorithms_846291,Java,3,0.08,0.08,Soft,https://www.edx.org/course/java-data-structures-algorithms,"Learn data structures and algorithms with Java."
+Advanced_Java_Programming_503927,Java,3,0.06,0.06,Hard,https://www.udemy.com/course/advanced-java,"Explore advanced Java programming concepts."
+Java_for_Enterprise_Applications_682135,Java,3,0.11,0.11,Hard,https://www.coursera.org/learn/java-enterprise,"Develop enterprise applications using Java."
+Introduction_to_AI_739562,AI,2,0.07,0.07,Hard,https://www.coursera.org/learn/ai,"Understand the basics of artificial intelligence."
+AI_for_Everyone_257846,AI,2,0.05,0.05,Soft,https://www.udacity.com/course/ai-for-everyone,"Learn the fundamentals of AI and its applications."
+Machine_Learning_with_Python_901274,AI,3,0.09,0.09,Hard,https://www.edx.org/course/machine-learning-python,"Implement machine learning algorithms using Python."
+Deep_Learning_Specialization_492875,AI,3,0.10,0.10,Soft,https://www.udemy.com/course/deep-learning-specialization,"Master deep learning techniques and applications."
+AI_for_Business_Leaders_634982,AI,3,0.11,0.11,Hard,https://www.coursera.org/learn/ai-business,"Learn how AI can be applied in business contexts."
+Python_for_Senior_Engineers_125679,Python,4,0.10,0.10,Hard,https://www.udemy.com/course/python-senior-engineers,"Advanced Python techniques for senior engineers."
+AI_Strategy_and_Leadership_376529,AI,4,0.11,0.11,Soft,https://www.coursera.org/learn/ai-strategy-leadership,"Lead AI projects and strategies in your organization."
+Advanced_Java_Performance_Tuning_842361,Java,4,0.07,0.07,Soft,https://www.edx.org/course/advanced-java-performance-tuning,"Optimize and tune Java applications for high performance."
+Executive_Data_Science_597213,ML,4,0.09,0.09,Hard,https://www.coursera.org/learn/executive-data-science,"Master data science at an executive level."
+AI_in_Business_Decision_Making_748902,AI,4,0.12,0.12,Hard,https://www.udacity.com/course/ai-business-decision-making,"Integrate AI into strategic business decisions."

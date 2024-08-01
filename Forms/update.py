@@ -30,6 +30,6 @@ index_combo_box = ctk.CTkComboBox(master= app,
 index_combo_box.pack(padx=20, pady=10)
 index_combo_box.set("Employee")
 
-update_vector(index_name = 'kbc', namespace = namespace, id = vector_id)
+# update_vector(index_name = 'kbc', namespace = namespace, id = vector_id)
 
 app.mainloop()
