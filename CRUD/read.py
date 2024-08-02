@@ -44,7 +44,7 @@ def query_vector_id(vector_id, namespace):
 def get_vector_values_by_id(id): # !!!
     index = pc.Index(index_name)
     result = index.fetch([f'{id}']).get('values')
-    values = result[id]['values']
+    values = result['id']['values']
 
     return values
 
@@ -77,10 +77,46 @@ def query_all(namespace):
     for result in results:
         if(namespace == 'positions'):
             list = result.get('id')
-            output += f"{list}\n"
+            output += f"ID: {list}\n"
         else:
             list = result.get('id')
             meta = result.get('metadata')
-            output += f"{list} {' '.join(meta.values())}\n"    ###     REMEMBER!!!
+            output += f"ID: {list}\nMetadata: {' '.join(meta.values())}\n"    ###     REMEMBER!!!
 
+    return output
+
+def query_one(id, namespace):
+    index = pc.Index(index_name)
+    
+    print(f"Querying with id: {id}, namespace: {namespace}")  # Debug print
+
+    if namespace == 'positions':
+        results = index.query(
+            vector=query_id(namespace, id),  # This should be replaced with the actual vector if available
+            namespace=namespace,
+            top_k=1,
+            include_values=True,
+        ).get('matches')
+    else:
+        results = index.query(
+            id=id,
+            namespace=namespace,
+            top_k=1,
+            include_values=True,
+            include_metadata=True
+        ).get('matches')
+
+    output = ""
+    for result in results:
+        if namespace == 'positions':
+            list = result.get('id')
+            vector = result.get('values')
+            output += f"Vector: {vector}\n"
+        else:
+            list = result.get('id')
+            vector = result.get('values')
+            meta = result.get('metadata')
+            output += f"Metadata: {' '.join(meta.values())}\nVector: {vector}\n"
+
+    print(f"Query result: {output}")  # Debug print
     return output
