@@ -1,13 +1,14 @@
 import customtkinter as ctk
-from functions import *
+import sys
+import os
 
 # Temporarily add the parent directory to the Python path
 original_sys_path = sys.path.copy()
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 try:
     # Import the api_key from the misc module
-    from CRUD.delete import *
+    from functions import *
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path
@@ -34,7 +35,7 @@ combo = combobox.get()
 button = ctk.CTkButton(app, text="Delete", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=240, command=lambda: [delete_vector_by_id(get_text_value(textbox), get_combo_value(combobox)), on_button_click(app, "done.py")])
 button.place(relx=0.5, rely=0.6, anchor="center")
 
-button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=140, command=lambda: on_button_click(app, "main.py"))
-button.place(relx=0.2, rely=0.9, anchor="center")
+button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=80, command=lambda: on_button_click(app, "main.py"))
+button.place(relx=0.15, rely=0.9, anchor="center")
 
 app.mainloop()

@@ -10,6 +10,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 try:
     # Import the api_key from the misc module
     from CRUD.create_vector import *
+    from CRUD.delete import *
+    from CRUD.update import *
+    from CRUD.read import *
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path
