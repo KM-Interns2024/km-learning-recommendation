@@ -1,13 +1,14 @@
 import customtkinter as ctk
-from functions import *
+import sys
+import os
 
 # Temporarily add the parent directory to the Python path
 original_sys_path = sys.path.copy()
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
 try:
     # Import the api_key from the misc module
-    from CRUD.delete import *
+    from functions import *
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path

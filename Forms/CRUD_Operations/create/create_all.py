@@ -1,10 +1,21 @@
 import customtkinter as ctk
-from functions import *
+import sys
+import os
+
+# Temporarily add the parent directory to the Python path
+original_sys_path = sys.path.copy()
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
+
+try:
+    from functions import *
+finally:
+    # Restore the original sys.path
+    sys.path = original_sys_path
 
 app = ctk.CTk()
 init(app, "Create All")
 
-button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "operations.py"))
+button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "CRUD_Operations/operations.py"))
 button.place(relx=0.15, rely=0.1, anchor="center")
 
 text_var = ctk.CTkLabel(app, text="Are you sure you want to create all the vectors?", font=("Arial", 12))
