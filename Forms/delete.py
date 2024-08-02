@@ -34,7 +34,7 @@ combo = combobox.get()
 button = ctk.CTkButton(app, text="Delete", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=240, command=lambda: [delete_vector_by_id(get_text_value(textbox), get_combo_value(combobox)), on_button_click(app, "done.py")])
 button.place(relx=0.5, rely=0.6, anchor="center")
 
-button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=140, command=lambda: on_button_click(app, "main.py"))
-button.place(relx=0.2, rely=0.9, anchor="center")
+button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=80, command=lambda: on_button_click(app, "main.py"))
+button.place(relx=0.15, rely=0.9, anchor="center")
 
 app.mainloop()

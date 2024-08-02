@@ -18,8 +18,8 @@ finally:
 app = tk.CTk()
 init(app, "Update")
 
-button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=140, command=lambda: on_button_click(app, "operations.py"))
-button.place(relx=0.2, rely=0.8, anchor="center")
+button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "update.py"))
+button.place(relx=0.15, rely=0.1, anchor="center")
 
 
 def get_text_value(textbox):
@@ -35,8 +35,9 @@ index_combo_box = ctk.CTkComboBox(app, values=['Employee', 'Course'])
 index_combo_box.place(relx=0.5, rely=0.2, anchor="center")
 
 button = ctk.CTkButton(app, text="Submit", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=140, command=lambda: [update_vector_metadata(id = vector_id, value1 = value1, value2 = value2, namespace = get_combo_value(index_combo_box), metadata = metadata), on_button_click(app, "operations.py")])
-button.place(relx=0.8, rely=0.8, anchor="center")
+button.place(relx=0.8, rely=0.9, anchor="center")
 
-# update_vector(index_name = 'kbc', namespace = namespace, id = vector_id)
+button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "main.py"))
+button.place(relx=0.15, rely=0.9, anchor="center")
 
 app.mainloop()
