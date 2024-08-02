@@ -1,4 +1,5 @@
 from pinecone import Pinecone
+from tkinter import messagebox
 import numpy as np
 import sys
 import os
@@ -21,19 +22,36 @@ index_name = "kbc"
 skills = ["Hard Skills", "Soft Skills"]
 
 
-def update_vector(id, value1, value2, namespace):
-    index = pc.Index(index_name)
-    list = []
+def update_vector_positions(id, value1, value2):
+    if((float(value1) >= 0 and float(value1) <= 1) and (float(value2) >= 0 and float(value2) <= 1)):
+        index = pc.Index(index_name)
+        list = []
 
-    list = list[value1, value2]
-    
-    index.update(id, list, namespace=namespace)
-    return index
+        list = [value1, value2]
 
-def update_vector_metadata(id, value1, value2, namespace, metadata):
-    index = pc.Index(index_name)
+        index.update(id, list, namespace="positions")
+        return index
+    else:
+        messagebox.showerror("Wrong Value, please enter a value between 0 and 1")
 
-    list = list[value1, value2]
+def update_vector_metadata_employees(id, value1, value2, metadata):
+    if((float(value1) >= 0 and float(value1) <= 1) and (float(value2) >= 0 and float(value2) <= 1)):
+        index = pc.Index(index_name)
 
-    index.update(id, list, metadata, namespace=namespace)
-    return index
+        list = [value1, value2]
+
+        index.update(id, list, {f"Position": metadata}, namespace="employees")
+        return index
+    else:
+        messagebox.showerror("Wrong Value, please enter a value between 0 and 1")
+
+def update_vector_metadata_courses(id, value1, value2, metadata1, metadata2):
+    if((float(value1) >= 0 and float(value1) <= 1) and (float(value2) >= 0 and float(value2) <= 1)):
+        index = pc.Index(index_name)
+
+        list = [value1, value2]
+
+        index.update(id, list, {f"Category": metadata1, "Technology": metadata2}, namespace="courses")
+        return index
+    else:
+        messagebox.showerror("Wrong Value, please enter a value between 0 and 1")
