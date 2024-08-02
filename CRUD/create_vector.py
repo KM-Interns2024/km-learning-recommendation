@@ -33,7 +33,10 @@ def create_all():
         with open(filename, newline='') as file:
             reader = csv.DictReader(file)
             # Explicitly specify the column names you want
-            metadata_columns = ['Technology', 'Category']
+            if filename == '../resources/employees.csv':
+                metadata_columns = ['Position']
+            else:
+                metadata_columns = ['Technology', 'Category']
             metadata_list = []
             for row in reader:
                 # Convert to dictionary with specified columns

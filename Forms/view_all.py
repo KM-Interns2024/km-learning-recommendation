@@ -3,7 +3,7 @@ from functions import *
 
 app = ctk.CTk()
 init(app, "View All Entries")
-app.geometry("1920x1080")
+app.geometry("1920x1080+0+0")
 
 button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=140, command=lambda: on_button_click(app, "operations.py"))
 button.place(relx=0.15, rely=0.1, anchor="center")
