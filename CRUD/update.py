@@ -17,19 +17,23 @@ finally:
 
 pc = Pinecone(api_key=api_key)
 
+index_name = "kbc"
 skills = ["Hard Skills", "Soft Skills"]
 
 
-def update_vector(index_name, namespace, id):
+def update_vector(id, value1, value2, namespace):
     index = pc.Index(index_name)
-    dimension = pc.describe_index(index_name).get('dimension')
     list = []
 
-    for el in range(dimension): # el stands for element
-        temp = float(input(f"Please enter a value for {skills[el]}: "))
-        while(temp < 0 or temp > 1):
-            temp = float(input(f"Please enter a value between 0.0 and 1.0 for {skills[el]} : "))
-        list.append(temp)
+    list = list[value1, value2]
     
     index.update(id, list, namespace=namespace)
-    return list
+    return index
+
+def update_vector_metadata(id, value1, value2, namespace, metadata):
+    index = pc.Index(index_name)
+
+    list = list[value1, value2]
+
+    index.update(id, list, metadata, namespace=namespace)
+    return index
