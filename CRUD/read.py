@@ -1,5 +1,18 @@
 from pinecone import Pinecone
-from misc.api_key import api_key
+import os
+import sys
+
+# Temporarily add the parent directory to the Python path
+original_sys_path = sys.path.copy()
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+try:
+    # Import the api_key from the misc module
+    from misc.api_key import api_key
+finally:
+    # Restore the original sys.path
+    sys.path = original_sys_path
+
 
 pc = Pinecone(api_key=api_key)
 index_name = 'kbc'
@@ -49,3 +62,25 @@ def query_course_rec(vector, metadata):
         list.append(result.get('id'))
 
     return list
+
+def query_all(namespace):
+    index = pc.Index(index_name)
+    results = index.query(
+        vector=[0, 0],
+        namespace=namespace,
+        top_k=10000,
+        include_values=True,
+        include_metadata=True
+    ).get('matches')
+
+    output = ""
+    for result in results:
+        if(namespace == 'positions'):
+            list = result.get('id')
+            output += f"{list}\n"
+        else:
+            list = result.get('id')
+            meta = result.get('metadata')
+            output += f"{list} {' '.join(meta.values())}\n"    ###     REMEMBER!!!
+
+    return output
