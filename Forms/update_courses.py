@@ -64,4 +64,7 @@ metadata2.place(relx=0.85, rely=0.57, anchor="center")
 button = ctk.CTkButton(app, text="Submit", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=100, command=lambda: submit_courses())
 button.place(relx=0.9, rely=0.9, anchor="center")
 
+button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "main.py"))
+button.place(relx=0.15, rely=0.9, anchor="center")
+
 app.mainloop()
