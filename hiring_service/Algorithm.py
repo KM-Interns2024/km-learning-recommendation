@@ -12,6 +12,8 @@ import nltk
 from tkinter import filedialog
 import os
 import shutil
+import Datasets
+
 nltk.download('punkt')
 
 # Load data
@@ -64,30 +66,8 @@ model.save('cv_job_maching.model')
 print("Model saved")
 
 
-def upload_file():
-    file_path = filedialog.askopenfilename(
-        title="Select a file",
-        filetypes=(("Pdf Files", "*.pdf"), ("all files", "*.*"))
-    )
-
-    if file_path:
-        upload_directory = os.path.join(os.getcwd(), 'uploads')
-
-        if not os.path.exists(upload_directory):
-            os.makedirs(upload_directory)
-
-        file_name = os.path.basename(file_path)
-        destination = os.path.join(upload_directory, file_name)
-        shutil.copy(file_path, destination)
-
-        print(F'File uploaded to {destination}')
-    else:
-        print('No file selected')
-
-
-
 #placeholder for CV.pdf
-pdf = PyPDF2.PdfReader('uploads/My Resume.pdf')
+pdf = PyPDF2.PdfReader('uploads/Aidel.pdf')
 resume = ""
 for i in range(len(pdf.pages)):
     pageObj = pdf.pages[i]
@@ -95,7 +75,14 @@ for i in range(len(pdf.pages)):
 
 # JD by input text:
 # jd = input("Paste your JD here: ")
+text = ''
 
+def import_text(text):
+    return str(text)
+
+
+jd = import_text("asdhashdhasd")
+print(jd)
 jd = """
 As our Python Developer, you would have the following responsibilities:
 
