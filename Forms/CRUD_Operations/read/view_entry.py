@@ -18,13 +18,13 @@ init(app, "View an Entries")
 app.geometry("500x300+700+400")
 
 button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "CRUD_Operations/read/select_view.py"))
-button.place(relx=0.15, rely=0.1, anchor="center")
+button.place(relx=0.1, rely=0.1, anchor="center")
 
 textbox_id = ctk.CTkTextbox(app, fg_color="transparent", border_color="#028fc4", border_width=1, height=20, width=240)
-textbox_id.place(relx=0.5, rely=0.25, anchor="center")
+textbox_id.place(relx=0.5, rely=0.1, anchor="center")
 
 combobox_namespace = ctk.CTkComboBox(master=app, values=["positions", "employees", "courses"])
-combobox_namespace.place(relx=0.5, rely=0.4, anchor="center")
+combobox_namespace.place(relx=0.5, rely=0.25, anchor="center")
 
 textbox = ctk.CTkTextbox(app, width=300, height=80, corner_radius=10, state='disabled')
 textbox.pack(padx=10)
@@ -43,6 +43,6 @@ button = ctk.CTkButton(app, text="Submit", corner_radius=32, hover_color="#0b345
 button.place(relx=0.8, rely=0.9, anchor="center")
 
 button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "main.py"))
-button.place(relx=0.15, rely=0.9, anchor="center")
+button.place(relx=0.1, rely=0.9, anchor="center")
 
 app.mainloop()
