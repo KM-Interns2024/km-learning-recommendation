@@ -13,6 +13,7 @@ import customtkinter as ctk
 import os
 import shutil
 import Datasets
+from upload_file import upload_file
 
 
 nltk.download('punkt')
@@ -68,8 +69,8 @@ def algorithm(jd, path):
     # print("Model saved")
     
     
-    #placeholder for CV.pdf
-    pdf = PyPDF2.PdfReader(f'{path}uploads/Todor_Pavlenkov_CV.pdf')
+
+    pdf = PyPDF2.PdfReader(f'{path}uploads/CV_to_be_rated.pdf')
     resume = ""
     for i in range(len(pdf.pages)):
         pageObj = pdf.pages[i]
@@ -79,8 +80,6 @@ def algorithm(jd, path):
     # jd = input("Paste your JD here: ")
     
     
-    
-    jd = jd
 
     def preprocess_text(text):
         # Convert the text to lowercase

@@ -2,6 +2,9 @@ import tkinter as tk
 from tkinter import filedialog
 import shutil
 import os
+from Forms.cv_insertion_check import check_cv_insertion
+
+
 
 def upload_file():
     # Open file dialog and ask the user to select a file
@@ -20,7 +23,9 @@ def upload_file():
                 os.makedirs(upload_directory)
 
             # Get the base name of the file to keep the original file name
-            file_name = os.path.basename(file_path)
+            # file_name = os.path.basename(file_path)
+            file_name = "CV_to_be_rated.pdf"
+            
 
             # Define the path where the file will be copied
             destination = os.path.join(upload_directory, file_name)
@@ -29,7 +34,11 @@ def upload_file():
             shutil.copy(file_path, destination)
 
             print(f'File uploaded to {destination}')
+            check_cv_insertion()
+            return file_name
         else:
             print('No file selected')
+            return None
     except Exception as e:
         print(f'Error: {e}')
+        return None
