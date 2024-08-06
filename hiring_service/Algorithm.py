@@ -9,9 +9,12 @@ import PyPDF2
 import re
 import plotly.graph_objects as go
 import nltk
-from tkinter import filedialog
+import customtkinter as ctk
 import os
 import shutil
+import Datasets
+
+
 nltk.download('punkt')
 
 def algorithm(jd, path):
@@ -121,18 +124,48 @@ def algorithm(jd, path):
                  'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 100}}))
     
     fig.update_layout(width=600, height=400)  # Adjust the width and height as desired
-    fig.show()
+    # fig.show()
     
+    
+    def on_button_click(app, form):
+        app.destroy()
+        os.system(f'python {form}')
+
+    def init(app, title):
+        app.title(f"{title}")
+        app.geometry("400x200+700+400")
+        ctk.set_appearance_mode("dark")
+        # app.iconbitmap("../venv/Lib/site-packages/customtkinter/assets/icons/images.ico")
+        app.resizable(False, False)
+        
     print(similarity)
-    
     # Print notification
+    app = ctk.CTk()
     if similarity < 50:
+        init(app, "Not Approved")
+        label = ctk.CTkLabel(app, text="Low chance, need to modify your CV!", text_color="red", font=("Arial", 16))
+        label.place(relx=0.5, rely=0.4, anchor="center")
+        label = ctk.CTkLabel(app, text=f"Percentage: {round(similarity, 2)}", font=("Arial", 14))
+        label.place(relx=0.5, rely=0.6, anchor="center")
+
         print(colored("Low chance, need to modify your CV!", "red", attrs=["bold"]))
     elif similarity >= 50 and similarity < 70:
+        init(app, "Approved but needs to be modified")
+        label = ctk.CTkLabel(app, text="Good you are Approved, but you can improve further!", text_color="yellow", font=("Arial", 16))
+        label.place(relx=0.5, rely=0.4, anchor="center")
+        label = ctk.CTkLabel(app, text=f"Percentage: {round(similarity, 2)}", font=("Arial", 14))
+        label.place(relx=0.5, rely=0.6, anchor="center")
+
         print(colored("Good chance but you can improve further!", "yellow", attrs=["bold"]))
     else:
+        init(app, "Congratulations you are Approved")
+        label = ctk.CTkLabel(app, text="Excellent! Your CV is Approved.", text_color="green", font=("Arial", 16))
+        label.place(relx=0.5, rely=0.4, anchor="center")
+        label = ctk.CTkLabel(app, text=f"Percentage: {round(similarity, 2)}", font=("Arial", 14))
+        label.place(relx=0.5, rely=0.6, anchor="center")
+        
         print(colored("Excellent! You can submit your CV.", "green", attrs=["bold"]))
-    
+    app.mainloop()
 
 # algorithm("""
 # As our Python Developer, you would have the following responsibilities:
