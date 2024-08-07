@@ -36,7 +36,7 @@ def create_all():
             if filename == '../resources/employees.csv':
                 metadata_columns = ['Position']
             else:
-                metadata_columns = ['Technology', 'Category']
+                metadata_columns = ['Technology', 'Category', 'Recommended for']
             metadata_list = []
             for row in reader:
                 # Convert to dictionary with specified columns

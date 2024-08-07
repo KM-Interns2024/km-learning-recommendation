@@ -45,13 +45,13 @@ def update_vector_metadata_employees(id, value1, value2, metadata):
     else:
         messagebox.showerror("Wrong Value, please enter a value between 0 and 1")
 
-def update_vector_metadata_courses(id, value1, value2, metadata1, metadata2):
+def update_vector_metadata_courses(id, value1, value2, metadata1, metadata2, metadata3):
     if((float(value1) >= 0 and float(value1) <= 1) and (float(value2) >= 0 and float(value2) <= 1)):
         index = pc.Index(index_name)
 
         list = [value1, value2]
 
-        index.update(id, list, {f"Category": metadata1, "Technology": metadata2}, namespace="courses")
+        index.update(id, list, {f"Category": metadata1, "Technology": metadata2, "Recommended for": metadata3}, namespace="courses")
         return index
     else:
         messagebox.showerror("Wrong Value, please enter a value between 0 and 1")

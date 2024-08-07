@@ -49,11 +49,12 @@ def get_vector_values_by_id(id): # !!!
     return values
 
 
-def query_course_rec(vector, metadata):
+def query_all_positions():
     index = pc.Index(index_name)
     results = index.query(
-        vector=vector,
-        top_k=5,
+        namespace='positions',
+        vector=[0, 0],
+        top_k=10000,
         include_values=True
     ).get("matches")
 
@@ -77,11 +78,11 @@ def query_all(namespace):
     for result in results:
         if(namespace == 'positions'):
             list = result.get('id')
-            output += f"ID: {list}\n"
+            output += f"ID: {list}\n\n"
         else:
             list = result.get('id')
             meta = result.get('metadata')
-            output += f"ID: {list}\nMetadata: {' '.join(meta.values())}\n"    ###     REMEMBER!!!
+            output += f"ID: {list}\nMetadata: {', '.join(meta.values())}\n\n"    ###     REMEMBER!!!
 
     return output
 
@@ -116,7 +117,7 @@ def query_one(id, namespace):
             list = result.get('id')
             vector = result.get('values')
             meta = result.get('metadata')
-            output += f"Metadata: {' '.join(meta.values())}\nVector: {vector}\n"
+            output += f"Metadata:\n{', '.join(meta.values())}\nVector: {vector}\n"
 
     print(f"Query result: {output}")  # Debug print
     return output

@@ -24,7 +24,8 @@ def submit_courses():
     value2_text = get_text_value(value2)
     metadata_text1 = get_text_value(metadata1)
     metadata_text2 = get_text_value(metadata2)
-    update_vector_metadata_courses(id_value, value1_text, value2_text, metadata_text1, metadata_text2)
+    metadata_text3 = get_text_value(metadata3)
+    update_vector_metadata_courses(id_value, value1_text, value2_text, metadata_text1, metadata_text2, metadata_text3)
     on_button_click(app, "CRUD_Operations/operations.py")
 # END FUNCTIONS
 
@@ -40,6 +41,11 @@ label = ctk.CTkLabel(app, text="Enter the Courses's current ID", font=("Arial", 
 label.place(relx=0.15, rely=0.25, anchor="center")
 id = ctk.CTkTextbox(app, height=20, width=200)
 id.place(relx=0.15, rely=0.32, anchor="center")
+
+label = ctk.CTkLabel(app, text="Enter what Position ID is Recommended for", font=("Arial", 12))
+label.place(relx=0.15, rely=0.5, anchor="center")
+metadata3 = ctk.CTkTextbox(app, height=20, width=200)
+metadata3.place(relx=0.15, rely=0.57, anchor="center")
 
 label = ctk.CTkLabel(app, text="Technical skill form 0 to 1", font=("Arial", 12))
 label.place(relx=0.5, rely=0.25, anchor="center")
