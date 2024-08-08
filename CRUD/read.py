@@ -35,7 +35,8 @@ def query_vector_id(vector_id, namespace):
         namespace=namespace,
         id=vector_id,
         top_k=3,
-        include_values=True
+        include_values=True,
+        include_metadata=True
     ).get('matches')
 
     return results
@@ -73,7 +74,7 @@ def query_all(namespace):
         include_values=True,
         include_metadata=True
     ).get('matches')
-
+    
     output = ""
     for result in results:
         if(namespace == 'positions'):
@@ -122,7 +123,6 @@ def query_one(id, namespace):
     print(f"Query result: {output}")  # Debug print
     return output
 
-
 def query_courses():
     index = pc.Index(index_name)
     results = index.query(
@@ -144,3 +144,19 @@ def query_courses():
         recommended_for.append(recommended)
 
     return course_ids, recommended_for
+
+def get_list_of_ids(namespace):
+    index = pc.Index(index_name)
+    results = index.query(
+        vector=[0, 0],
+        namespace=namespace,
+        top_k=10000,
+        include_values=True,
+        include_metadata=True
+    ).get('matches')
+    
+    list = []
+    for result in results:
+        list.append(result.get('id'))
+    
+    return list

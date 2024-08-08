@@ -123,7 +123,7 @@ def algorithm(jd, path):
                  'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 100}}))
     
     fig.update_layout(width=600, height=400)  # Adjust the width and height as desired
-    # fig.show()
+    fig.show()
     
     
     def on_button_click(app, form):
