@@ -1,4 +1,5 @@
 from pinecone import Pinecone
+from tkinter import messagebox
 import numpy as np
 import sys
 import os
@@ -17,19 +18,40 @@ finally:
 
 pc = Pinecone(api_key=api_key)
 
+index_name = "kbc"
 skills = ["Hard Skills", "Soft Skills"]
 
 
-def update_vector(index_name, namespace, id):
-    index = pc.Index(index_name)
-    dimension = pc.describe_index(index_name).get('dimension')
-    list = []
+def update_vector_positions(id, value1, value2):
+    if((float(value1) >= 0 and float(value1) <= 1) and (float(value2) >= 0 and float(value2) <= 1)):
+        index = pc.Index(index_name)
+        list = []
 
-    for el in range(dimension): # el stands for element
-        temp = float(input(f"Please enter a value for {skills[el]}: "))
-        while(temp < 0 or temp > 1):
-            temp = float(input(f"Please enter a value between 0.0 and 1.0 for {skills[el]} : "))
-        list.append(temp)
-    
-    index.update(id, list, namespace=namespace)
-    return list
+        list = [value1, value2]
+
+        index.update(id, list, namespace="positions")
+        return index
+    else:
+        messagebox.showerror("Wrong Value, please enter a value between 0 and 1")
+
+def update_vector_metadata_employees(id, value1, value2, metadata):
+    if((float(value1) >= 0 and float(value1) <= 1) and (float(value2) >= 0 and float(value2) <= 1)):
+        index = pc.Index(index_name)
+
+        list = [value1, value2]
+
+        index.update(id, list, {f"Position": metadata}, namespace="employees")
+        return index
+    else:
+        messagebox.showerror("Wrong Value, please enter a value between 0 and 1")
+
+def update_vector_metadata_courses(id, value1, value2, metadata1, metadata2, metadata3):
+    if((float(value1) >= 0 and float(value1) <= 1) and (float(value2) >= 0 and float(value2) <= 1)):
+        index = pc.Index(index_name)
+
+        list = [value1, value2]
+
+        index.update(id, list, {f"Category": metadata1, "Technology": metadata2, "Recommended for": metadata3}, namespace="courses")
+        return index
+    else:
+        messagebox.showerror("Wrong Value, please enter a value between 0 and 1")

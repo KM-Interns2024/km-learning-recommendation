@@ -31,11 +31,15 @@ def create_all():
     def get_metadata(filename):
         with open(filename, newline='') as file:
             reader = csv.DictReader(file)
-            metadata = reader.fieldnames[1:2]
+            # Explicitly specify the column names you want
+            if filename == '../resources/employees.csv':
+                metadata_columns = ['Position']
+            else:
+                metadata_columns = ['Technology', 'Category', 'Recommended for']
             metadata_list = []
             for row in reader:
-                # Convert to dictionary
-                metadata_dict = {meta: row[meta] for meta in metadata}
+                # Convert to dictionary with specified columns
+                metadata_dict = {meta: row[meta] for meta in metadata_columns}
                 metadata_list.append(metadata_dict)
         return metadata_list
 
