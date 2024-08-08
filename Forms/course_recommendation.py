@@ -1,4 +1,6 @@
 import customtkinter as ctk
+
+from Forms.employee_skills_plot import open_employee_section
 from functions import *
 import sys
 import os
@@ -48,6 +50,8 @@ button.place(relx=0.5, rely=0.9, anchor="center")
 button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "main.py"))
 button.place(relx=0.1, rely=0.9, anchor="center")
 
+button_employee = ctk.CTkButton(app, text="Track Employee", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: open_employee_section(app))
+button_employee.place(relx=0.9, rely=0.9, anchor="center")
 # Properly handle window closing
 def on_closing():
     app.withdraw()
