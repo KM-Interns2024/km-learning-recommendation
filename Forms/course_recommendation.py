@@ -1,6 +1,4 @@
 import customtkinter as ctk
-
-from Forms.employee_skills_plot import open_employee_section
 from functions import *
 import sys
 import os
@@ -11,6 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 try:
     # Import the api_key from the misc module
+    from Forms.employee_skills_plot import open_employee_section
     from recommender import recommender
 finally:
     # Restore the original sys.path
@@ -18,7 +17,7 @@ finally:
 
 app = ctk.CTk()
 init(app, "View an Entries")
-app.geometry("500x300+700+400")
+app.geometry("600x300+700+400")
 
 text_var = ctk.CTkLabel(app, text="Enter Position ID", font=("Arial", 12))
 text_var.place(relx=0.5, rely=0.1, anchor="center")
@@ -51,7 +50,7 @@ button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b
 button.place(relx=0.1, rely=0.9, anchor="center")
 
 button_employee = ctk.CTkButton(app, text="Track Employee", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: open_employee_section(app))
-button_employee.place(relx=0.9, rely=0.9, anchor="center")
+button_employee.place(relx=0.85, rely=0.9, anchor="center")
 # Properly handle window closing
 def on_closing():
     app.withdraw()
