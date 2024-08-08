@@ -1,6 +1,12 @@
 # K-Means Clustering
 import sys
 import os
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+from sklearn.preprocessing import LabelEncoder
+from sklearn.cluster import KMeans
+
 # Temporarily add the parent directory to the Python path
 original_sys_path = sys.path.copy()
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -12,22 +18,20 @@ finally:
     # Restore the original sys.path
     sys.path = original_sys_path
 
-# Importing the libraries
-import numpy as np
-import matplotlib.pyplot as plt
-import pandas as pd
-from sklearn.preprocessing import LabelEncoder
-from sklearn.cluster import KMeans
-
 def recommender(position):
-    # Querying the data from Pinecone
-    data_list = query_all_positions()
+    # Query the courses and positions
+    course_ids, recommended_for = query_courses()
 
-    # Encoding the string data to numerical data
+    # Initialize LabelEncoder for both course_ids and recommended_for
+    labelencoder_course = LabelEncoder()
     labelencoder_position = LabelEncoder()
-    encoded_positions = labelencoder_position.fit_transform(data_list)
 
-    X = encoded_positions.reshape(-1, 1)
+    # Encode the course_ids and recommended_for positions
+    encoded_course_ids = labelencoder_course.fit_transform(course_ids)
+    encoded_positions = labelencoder_position.fit_transform(recommended_for)
+
+    # Combine encoded course IDs and encoded positions into a single variable X
+    X = np.array(list(zip(encoded_course_ids, encoded_positions)))
 
     # Using the elbow method to find the optimal number of clusters
     wcss = []
@@ -39,15 +43,14 @@ def recommender(position):
     plt.title('The Elbow Method')
     plt.xlabel('Number of clusters')
     plt.ylabel('WCSS')
-    # plt.show()  # Here we see that the optimal number of clusters in this dataset(and X values) is 5
+    # plt.show()  # Display the plot
 
     # Training the K-Means model on the dataset
     kmeans = KMeans(n_clusters=5, init="k-means++", random_state=42)
-    y_kmeans = kmeans.fit_predict(X)   # Training and creating independent variable
+    y_kmeans = kmeans.fit_predict(X)   # Training and creating cluster assignments
 
-    # Create a DataFrame to store the positions and their clusters
-    import pandas as pd
-    dataset = pd.DataFrame({'Position': data_list, 'Cluster': y_kmeans})
+    # Create a DataFrame to store the courses, positions, and their clusters
+    dataset = pd.DataFrame({'CourseID': course_ids, 'Position': recommended_for, 'Cluster': y_kmeans})
 
     # Function to recommend courses based on the position
     def recommend_courses(position):
@@ -58,23 +61,22 @@ def recommender(position):
         # Encode the input
         encoded_position = labelencoder_position.transform([position])[0]
         
-        # Predict the cluster
-        cluster = kmeans.predict([[encoded_position]])[0]
+        # Predict the cluster for the given position
+        cluster = kmeans.predict([[encoded_position, encoded_course_ids[0]]])[0]
         
         # Recommend courses from the same cluster
-        recommended_courses = dataset[dataset['Cluster'] == cluster]['Position']
+        recommended_courses = dataset[dataset['Cluster'] == cluster]['CourseID']
         
         return recommended_courses.tolist()
 
     # Example user input (replace with actual user input code)
-    user_position = position
+    user_position = position  # Replace with actual user input
 
     # Recommend courses for the user input
     recommended_courses = recommend_courses(user_position)
     if recommended_courses is None:
         print("None")
-        return None
     else:
         recommended_courses_str = "\n".join(recommended_courses)
-        print(f"Recommended courses for the position {user_position}:\n{recommended_courses_str}")
-        return f"Recommended courses for the position {user_position}:\n{recommended_courses_str}"
+        print(f"Position:\n{user_position}\n\nRecommended Courses:\n{recommended_courses_str}")
+        return f"Position:\n{user_position}\n\nRecommended Courses:\n{recommended_courses_str}"

@@ -121,3 +121,26 @@ def query_one(id, namespace):
 
     print(f"Query result: {output}")  # Debug print
     return output
+
+
+def query_courses():
+    index = pc.Index(index_name)
+    results = index.query(
+        vector=[0, 0],
+        namespace='courses',
+        top_k=10000,
+        include_values=True,
+        include_metadata=True
+    ).get('matches')
+
+    course_ids = []
+    recommended_for = []
+
+    for result in results:
+        course_id = result.get('id')
+        meta = result.get('metadata')
+        recommended = meta.get('Recommended for')  # Extract "Recommended for" field
+        course_ids.append(course_id)
+        recommended_for.append(recommended)
+
+    return course_ids, recommended_for
