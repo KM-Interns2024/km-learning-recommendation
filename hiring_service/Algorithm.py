@@ -130,6 +130,7 @@ def algorithm(jd, path):
         app.destroy()
         os.system(f'python {form}')
 
+
     def init(app, title):
         app.title(f"{title}")
         app.geometry("400x200+700+400")
@@ -140,12 +141,16 @@ def algorithm(jd, path):
     print(similarity)
     # Print notification
     app = ctk.CTk()
+    similarity = 60
     if similarity < 50:
         init(app, "Not Approved")
         label = ctk.CTkLabel(app, text="Low chance, need to modify your CV!", text_color="red", font=("Arial", 16))
         label.place(relx=0.5, rely=0.4, anchor="center")
         label = ctk.CTkLabel(app, text=f"Percentage: {round(similarity, 2)}", font=("Arial", 14))
         label.place(relx=0.5, rely=0.6, anchor="center")
+        button_back = ctk.CTkButton(master = app, text="Go to main page", command=lambda: on_button_click(app, "../Forms/main.py"),
+                                    corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90)
+        button_back.place(relx = 0.05, rely=0.8)
 
         print(colored("Low chance, need to modify your CV!", "red", attrs=["bold"]))
     elif similarity >= 50 and similarity < 70:
@@ -155,6 +160,14 @@ def algorithm(jd, path):
         label = ctk.CTkLabel(app, text=f"Percentage: {round(similarity, 2)}", font=("Arial", 14))
         label.place(relx=0.5, rely=0.6, anchor="center")
 
+        button = ctk.CTkButton(master = app, text="Rate candidate", command=lambda: on_button_click(app, "../Forms/manager_input.py"),
+                               corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90)
+        button.place(relx = 0.675, rely=0.8)
+
+        button_back = ctk.CTkButton(master = app, text="Go to main page", command=lambda: on_button_click(app, "../Forms/main.py"),
+                                    corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90)
+        button_back.place(relx = 0.05, rely=0.8)
+
         print(colored("Good chance but you can improve further!", "yellow", attrs=["bold"]))
     else:
         init(app, "Congratulations you are Approved")
@@ -162,6 +175,13 @@ def algorithm(jd, path):
         label.place(relx=0.5, rely=0.4, anchor="center")
         label = ctk.CTkLabel(app, text=f"Percentage: {round(similarity, 2)}", font=("Arial", 14))
         label.place(relx=0.5, rely=0.6, anchor="center")
+        button = ctk.CTkButton(master = app, text="Rate candidate", command=lambda: on_button_click(app, "../Forms/manager_input.py"),
+                               corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90)
+        button.place(relx = 0.675, rely=0.8)
+
+        button_back = ctk.CTkButton(master = app, text="Go to main page", command=lambda: on_button_click(app, "../Forms/main.py"),
+                                    corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90)
+        button_back.place(relx = 0.05, rely=0.8)
         
         print(colored("Excellent! You can submit your CV.", "green", attrs=["bold"]))
     app.mainloop()
