@@ -11,6 +11,7 @@ print(sys.path)
 try:
     # Import the api_key from the misc module
     from CRUD.create_vector import create_employee
+    from services.searchable_combobox import *
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path
@@ -55,8 +56,10 @@ textbox_candidate_id.place(relx=0.34, rely=0.20)
 label_candidate_position = ctk.CTkLabel(master=app, text="Position")
 label_candidate_position.place(relx=0.35, rely=0.30)
 
-textbox_candidate_position = ctk.CTkTextbox(master=app, width=195, height=5)
-textbox_candidate_position.place(relx=0.34, rely=0.40)
+list_position_entries = get_list_of_ids('positions')
+combobox_candidate_position = SearchableCombobox(app)
+combobox_candidate_position.set_completion_list(list_position_entries)
+combobox_candidate_position.place(relx=0.34, rely=0.40)
 
 label_soft_rating = ctk.CTkLabel(master=app, text="Soft skills")
 label_soft_rating.place(relx=0.35, rely=0.50)
@@ -80,11 +83,14 @@ slider_hard.place(relx=0.5, rely=0.75, anchor=ctk.CENTER)
 
 button_submit = ctk.CTkButton(app, text="Submit", corner_radius=32, hover_color="#0b3459",
                         fg_color="transparent", border_color="#028fc4", border_width=2, width=90, 
-                        command= lambda:create_employee(textbox_candidate_id.get('0.0', 'end'), get_slider_values(),textbox_candidate_position.get('0.0', 'end'))
+                        command= lambda:create_employee(textbox_candidate_id.get('0.0', 'end'),
+                        get_slider_values(), combobox_candidate_position.get())
                         )
 button_submit.place(relx=0.5, rely=0.90, anchor="center")
 
-button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "main.py"))
+button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459",
+                        fg_color="transparent", border_color="#028fc4", border_width=2, width=90,
+                        command=lambda: on_button_click(app, "main.py"))
 button.place(relx=0.1, rely=0.1, anchor="center")
 
 

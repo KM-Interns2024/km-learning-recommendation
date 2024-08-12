@@ -107,7 +107,4 @@ def create_employee(id, values, position_meta):
     namespace = 'employees'
     values = (float(i)/100 for i in values)
     id = id.strip()
-    position_meta = position_meta[:-1]
     index.upsert([(id, values, {"Position": position_meta})], namespace=namespace)
-
-    print("Success")

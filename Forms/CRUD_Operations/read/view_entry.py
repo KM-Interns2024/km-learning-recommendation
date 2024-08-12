@@ -58,7 +58,8 @@ def on_submit():
     textbox.insert("0.0", f"{result}")
     textbox.configure(state='disabled')
 
-button = ctk.CTkButton(app, text="Submit", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=140, command=on_submit)
+button = ctk.CTkButton(app, text="Submit", corner_radius=32, hover_color="#0b3459", fg_color="transparent",
+                        border_color="#028fc4", border_width=2, width=140, command=on_submit)
 button.place(relx=0.8, rely=0.9, anchor="center")
 
 button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "main.py"))
