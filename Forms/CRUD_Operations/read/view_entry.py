@@ -16,14 +16,17 @@ finally:
     sys.path = original_sys_path
 
 app = ctk.CTk()
-init(app, "View an entry")
+init(app, "View Entry")
 app.geometry("500x300+700+400")
 
-button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "CRUD_Operations/read/select_view.py"))
+button = ctk.CTkButton(app, text="Go Back", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "CRUD_Operations/operations.py"))
 button.place(relx=0.1, rely=0.1, anchor="center")
 
+text_var = ctk.CTkLabel(app, text="Select type:", font=("Arial", 12))
+text_var.place(relx=0.5, rely=0.05, anchor="center")
+
 combobox_namespace = ctk.CTkComboBox(master=app, values=["positions", "employees", "courses"], command = lambda x: select_namespace())
-combobox_namespace.place(relx=0.5, rely=0.1, anchor="center")
+combobox_namespace.place(relx=0.5, rely=0.12, anchor="center")
 
 
 def select_namespace():
@@ -32,17 +35,19 @@ def select_namespace():
     combobox_id.set_completion_list(list_entries)
     textbox.delete('0.0', 'end')
 
+text_var = ctk.CTkLabel(app, text="Select an entry", font=("Arial", 12))
+text_var.place(relx=0.5, rely=0.25, anchor="center")
 
 list_entries = get_list_of_ids(combobox_namespace.get())
 combobox_id = SearchableCombobox(app)
 combobox_id.set_completion_list(list_entries)
-combobox_id.place(relx = 0.5, rely = 0.25, anchor='center')
+combobox_id.place(relx = 0.5, rely = 0.32, anchor='center')
 combobox_id.configure(values=list_entries)
 
 
 textbox = ctk.CTkTextbox(app, width=300, height=80, corner_radius=10, state='disabled')
 textbox.pack(padx=10)
-textbox.place(relx=0.5, rely=0.6, anchor="center")
+textbox.place(relx=0.5, rely=0.65, anchor="center")
 
 def on_submit():
     text = combobox_id.get()

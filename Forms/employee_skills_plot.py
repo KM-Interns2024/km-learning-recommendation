@@ -1,10 +1,22 @@
 import customtkinter as ctk
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from plot_employee_development import employee_skills_plot
-from CRUD.read import query_vector_id
+import sys
+import os
 
-def open_employee_section(app):
-    employee_window = ctk.CTkToplevel(app)
+# Temporarily add the parent directory to the Python path
+original_sys_path = sys.path.copy()
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+try:
+    # Import the api_key from the misc module
+    from CRUD.read import *
+finally:
+    # Restore the original sys.path
+    sys.path = original_sys_path
+
+def open_employee_section():
+    employee_window = ctk.CTkToplevel()
     employee_window.title("Track Employee Development")
     employee_window.geometry("500x300+700+400")
 
@@ -65,7 +77,7 @@ def open_employee_section(app):
             fig = employee_skills_plot(employee_id, position_title)
 
             # Create a new window (Toplevel) for the graph
-            graph_window = ctk.CTkToplevel(app)
+            graph_window = ctk.CTkToplevel()
             graph_window.title("Employee Skills Plot")
             graph_window.geometry("800x600+700+400")  # Size for displaying the graph
 
@@ -77,6 +89,8 @@ def open_employee_section(app):
             # Destroy the employee_window
             employee_window.destroy()
 
+            graph_window.mainloop()
+
         except Exception as e:
             # Display a general error message for other exceptions
             employee_id_error.configure(text=f"Error: {str(e)}")
@@ -85,3 +99,5 @@ def open_employee_section(app):
                                   fg_color="transparent", border_color="#028fc4", border_width=2, width=140,
                                   command=on_employee_submit)
     submit_button.place(relx=0.5, rely=0.8, anchor="center")
+
+    employee_window.mainloop()
