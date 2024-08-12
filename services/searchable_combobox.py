@@ -3,12 +3,13 @@ import customtkinter as ctk
 from tkinter import ttk
 
 class SearchableCombobox(ctk.CTkComboBox):
-    def __init__(self, master, **kwargs):
+    def __init__(self, master, default_value='', **kwargs):
         super().__init__(master, **kwargs)
         self._completion_list = []
         self._hits = []
         self._hit_index = 0
         self.position = 0
+        self.set(default_value)
         self.bind('<KeyRelease>', self.handle_keyrelease)
 
     def set_completion_list(self, completion_list):
