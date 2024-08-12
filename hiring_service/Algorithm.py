@@ -141,7 +141,6 @@ def algorithm(jd, path):
     print(similarity)
     # Print notification
     app = ctk.CTk()
-    similarity = 60
     if similarity < 50:
         init(app, "Not Approved")
         label = ctk.CTkLabel(app, text="Low chance, need to modify your CV!", text_color="red", font=("Arial", 16))

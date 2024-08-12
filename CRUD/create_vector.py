@@ -100,3 +100,14 @@ def create_all():
     kbc_insert(employees, "employees")
     kbc_insert(positions, "positions")
     kbc_insert(courses, "courses")
+
+def create_employee(id, values, position_meta):
+    pc = Pinecone(api_key=api_key)
+    index = pc.Index("kbc")
+    namespace = 'employees'
+    values = (float(i)/100 for i in values)
+    id = id.strip()
+    position_meta = position_meta[:-1]
+    index.upsert([(id, values, {"Position": position_meta})], namespace=namespace)
+
+    print("Success")
