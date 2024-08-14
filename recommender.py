@@ -1,6 +1,8 @@
 # K-Means Clustering
 import sys
 import os
+import random
+
 import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
@@ -18,6 +20,7 @@ finally:
     # Restore the original sys.path
     sys.path = original_sys_path
 
+
 def recommender(position):
     # Query the courses and positions
     course_ids, recommended_for = query_courses()
@@ -34,20 +37,20 @@ def recommender(position):
     X = np.array(list(zip(encoded_course_ids, encoded_positions)))
 
     # Using the elbow method to find the optimal number of clusters
-    wcss = []
-    for i in range(1, 11):
-        kmeans = KMeans(n_clusters=i, init="k-means++", random_state=42)
-        kmeans.fit(X)   # Training
-        wcss.append(kmeans.inertia_)
-    plt.plot(range(1, 11), wcss)
-    plt.title('The Elbow Method')
-    plt.xlabel('Number of clusters')
-    plt.ylabel('WCSS')
+    # wcss = []
+    # for i in range(1, 11):
+    #     kmeans = KMeans(n_clusters=i, init="k-means++", random_state=42)
+    #     kmeans.fit(X)   # Training
+    #     wcss.append(kmeans.inertia_)
+    # plt.plot(range(1, 11), wcss)
+    # plt.title('The Elbow Method')
+    # plt.xlabel('Number of clusters')
+    # plt.ylabel('WCSS')
     # plt.show()  # Display the plot
 
     # Training the K-Means model on the dataset
     kmeans = KMeans(n_clusters=5, init="k-means++", random_state=42)
-    y_kmeans = kmeans.fit_predict(X)   # Training and creating cluster assignments
+    y_kmeans = kmeans.fit_predict(X)  # Training and creating cluster assignments
 
     # Create a DataFrame to store the courses, positions, and their clusters
     dataset = pd.DataFrame({'CourseID': course_ids, 'Position': recommended_for, 'Cluster': y_kmeans})
@@ -57,16 +60,17 @@ def recommender(position):
         # Check if the input value is in the LabelEncoder classes
         if position not in labelencoder_position.classes_:
             return None
-        
+
         # Encode the input
         encoded_position = labelencoder_position.transform([position])[0]
-        
+
         # Predict the cluster for the given position
-        cluster = kmeans.predict([[encoded_position, encoded_course_ids[0]]])[0]
-        
+        cluster = dataset['Cluster'].unique()
+
         # Recommend courses from the same cluster
-        recommended_courses = dataset[dataset['Cluster'] == cluster]['CourseID']
-        
+        selected_cluster = random.choice(cluster)
+        recommended_courses = dataset[dataset['Cluster'] == selected_cluster]['CourseID']
+
         return recommended_courses.tolist()
 
     # Example user input (replace with actual user input code)
