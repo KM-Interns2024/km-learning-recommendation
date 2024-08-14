@@ -9,6 +9,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 try:
     # Import the api_key from the misc module
     from functions import *
+    from services.searchable_combobox import *
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path
@@ -24,16 +25,28 @@ def get_combo_value(combobox):
     combo = combobox.get()
     return combo
 
-textbox = ctk.CTkTextbox(app, fg_color="transparent", border_color="#028fc4", border_width=1, height=20, width=240)
-textbox.place(relx=0.5, rely=0.2, anchor="center")
+def select_namespace():
+    list_entries = get_list_of_ids(combobox_namespace.get())
+    combobox_entry_id.configure(values=get_list_of_ids(combobox_namespace.get()))
+    combobox_entry_id.set_completion_list(list_entries)
 
-combobox = ctk.CTkComboBox(master=app, values=["positions", "employees", "courses"])
-combobox.place(relx=0.5, rely=0.4, anchor="center")
+combobox_namespace = ctk.CTkComboBox(master=app, values=["positions", "employees", "courses"], command=lambda x: select_namespace())
+combobox_namespace.place(relx=0.5, rely=0.2, anchor="center")
 
-button = ctk.CTkButton(app, text="Delete", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=240, command=lambda: [delete_vector_by_id(get_text_value(textbox), get_combo_value(combobox)), on_button_click(app, "done.py")])
+list_entries = get_list_of_ids(combobox_namespace.get())
+combobox_entry_id = SearchableCombobox(app)
+combobox_entry_id.place(relx = 0.5, rely = 0.4, anchor='center')
+combobox_entry_id.configure(values=list_entries)
+
+
+button = ctk.CTkButton(app, text="Delete", corner_radius=32, hover_color="#0b3459", fg_color="transparent",
+                        border_color="#028fc4", border_width=2, width=240,
+                          command=lambda: [delete_vector_by_id(combobox_entry_id.get(), combobox_namespace.get()),
+                                            on_button_click(app, "done.py")])
 button.place(relx=0.5, rely=0.6, anchor="center")
 
-button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=80, command=lambda: on_button_click(app, "main.py"))
+button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent",
+                        border_color="#028fc4", border_width=2, width=80, command=lambda: on_button_click(app, "main.py"))
 button.place(relx=0.15, rely=0.9, anchor="center")
 
 app.mainloop()

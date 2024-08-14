@@ -160,3 +160,20 @@ def get_list_of_ids(namespace):
         list.append(result.get('id'))
     
     return list
+
+def query_employee_position_by_id(employee_id):
+    namespace = 'employees'
+    index = pc.Index('kbc')
+
+    results = index.query(
+        id=employee_id,
+        namespace=namespace,
+        top_k=1,
+        include_values=True,
+        include_metadata=True
+    ).get('matches')[0]
+
+    meta = results.get('metadata')
+    position = meta.get('Position')
+
+    return position

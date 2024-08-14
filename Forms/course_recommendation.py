@@ -11,26 +11,29 @@ try:
     # Import the api_key from the misc module
     from Forms.employee_skills_plot import open_employee_section
     from recommender import recommender
+    from services.searchable_combobox import *
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path
 
 app = ctk.CTk()
-init(app, "View an Entries")
+init(app, "Recommend courses for a position")
 app.geometry("600x300+700+400")
 
-text_var = ctk.CTkLabel(app, text="Enter Position ID", font=("Arial", 12))
+text_var = ctk.CTkLabel(app, text="Select position", font=("Arial", 12))
 text_var.place(relx=0.5, rely=0.1, anchor="center")
 
-textbox_id = ctk.CTkTextbox(app, fg_color="transparent", border_color="#028fc4", border_width=1, height=20, width=240)
-textbox_id.place(relx=0.5, rely=0.2, anchor="center")
+list_entries = get_list_of_ids('positions')
+combobox_position_id = SearchableCombobox(app)
+combobox_position_id.set_completion_list(list_entries)
+combobox_position_id.place(relx=0.5, rely=0.2, anchor="center")
 
 textbox = ctk.CTkTextbox(app, width=300, height=120, corner_radius=10, state='disabled')
 textbox.pack(padx=10)
 textbox.place(relx=0.5, rely=0.55, anchor="center")
 
 def on_submit():
-    text = textbox_id.get("0.0", "end").strip()
+    text = combobox_position_id.get()
     try:
         result = recommender(text)  # Call the recommender function
         if result is None:
@@ -49,7 +52,7 @@ button.place(relx=0.5, rely=0.9, anchor="center")
 button = ctk.CTkButton(app, text="Main Page", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: on_button_click(app, "main.py"))
 button.place(relx=0.1, rely=0.9, anchor="center")
 
-button_employee = ctk.CTkButton(app, text="Track Employee", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: open_employee_section())
+button_employee = ctk.CTkButton(app, text="Track Employee", corner_radius=32, hover_color="#0b3459", fg_color="transparent", border_color="#028fc4", border_width=2, width=90, command=lambda: open_employee_section(app))
 button_employee.place(relx=0.85, rely=0.9, anchor="center")
 # Properly handle window closing
 def on_closing():

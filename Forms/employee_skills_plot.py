@@ -13,6 +13,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 try:
     # Import the api_key from the misc module
     from CRUD.read import *
+    from services.searchable_combobox import *
 finally:
     # Restore the original sys.path
     sys.path = original_sys_path
@@ -23,6 +24,7 @@ def show_frame(frame):
 def open_employee_section(app):
     # Main Frame for Employee Section
     main_frame = ctk.CTkFrame(app)
+    
     main_frame.grid(row=0, column=0, sticky="nsew")
 
     # Frame for Graph Display
@@ -34,20 +36,24 @@ def open_employee_section(app):
     app.grid_columnconfigure(0, weight=1)
 
     # Employee Section Widgets
-    employee_id_label = ctk.CTkLabel(main_frame, text="Enter Employee ID", font=("Arial", 12))
+    employee_id_label = ctk.CTkLabel(main_frame, text="Select employee", font=("Arial", 12))
     employee_id_label.place(relx=0.5, rely=0.2, anchor="center")
 
-    employee_id_entry = ctk.CTkTextbox(main_frame, fg_color="transparent", border_color="#028fc4", border_width=1, height=20, width=240)
-    employee_id_entry.place(relx=0.5, rely=0.3, anchor="center")
+    list_employees = get_list_of_ids('employees')
+    combobox_employee_id = SearchableCombobox(main_frame)
+    combobox_employee_id.set_completion_list(list_employees)
+    combobox_employee_id.place(relx=0.5, rely=0.3, anchor='center')
 
     employee_id_error = ctk.CTkLabel(main_frame, text="", font=("Arial", 10), text_color="red")
     employee_id_error.place(relx=0.5, rely=0.35, anchor="center")
 
-    position_title_label = ctk.CTkLabel(main_frame, text="Enter Position Title", font=("Arial", 12))
+    position_title_label = ctk.CTkLabel(main_frame, text="Select position", font=("Arial", 12))
     position_title_label.place(relx=0.5, rely=0.5, anchor="center")
 
-    position_title_entry = ctk.CTkTextbox(main_frame, fg_color="transparent", border_color="#028fc4", border_width=1, height=20, width=240)
-    position_title_entry.place(relx=0.5, rely=0.6, anchor="center")
+    list_positions = get_list_of_ids('positions')
+    combobox_position_id = SearchableCombobox(main_frame)
+    combobox_position_id.set_completion_list(list_positions)
+    combobox_position_id.place(relx=0.5, rely=0.6, anchor='center')
 
     position_title_error = ctk.CTkLabel(main_frame, text="", font=("Arial", 10), text_color="red")
     position_title_error.place(relx=0.5, rely=0.65, anchor="center")
@@ -69,8 +75,8 @@ def open_employee_section(app):
             return False, "Invalid Position Title. Please check and try again."
 
     def on_employee_submit():
-        employee_id = employee_id_entry.get("0.0", "end").strip()
-        position_title = position_title_entry.get("0.0", "end").strip()
+        employee_id = combobox_employee_id.get()
+        position_title = combobox_position_id.get()
         employee_id_error.configure(text="")
         position_title_error.configure(text="")
 

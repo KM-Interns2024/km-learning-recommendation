@@ -107,23 +107,23 @@ def algorithm(jd, path):
     similarity = 100*(np.dot(np.array(v1), np.array(v2))) / (norm(np.array(v1)) * norm(np.array(v2)))
     print(round(similarity, 2))
     
-    fig = go.Figure(go.Indicator(
-        domain = {'x': [0, 1], 'y': [0, 1]},
-        value = similarity,
-        mode = "gauge+number",
-        title = {'text': "Matching percentage (%)"},
-        #delta = {'reference': 100},
-        gauge = {
-            'axis': {'range': [0, 100]},
-            'steps' : [
-                {'range': [0, 50], 'color': "#FFB6C1"},
-                {'range': [50, 70], 'color': "#FFFFE0"},
-                {'range': [70, 100], 'color': "#90EE90"}
-            ],
-                 'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 100}}))
+    # fig = go.Figure(go.Indicator(
+    #     domain = {'x': [0, 1], 'y': [0, 1]},
+    #     value = similarity,
+    #     mode = "gauge+number",
+    #     title = {'text': "Matching percentage (%)"},
+    #     #delta = {'reference': 100},
+    #     gauge = {
+    #         'axis': {'range': [0, 100]},
+    #         'steps' : [
+    #             {'range': [0, 50], 'color': "#FFB6C1"},
+    #             {'range': [50, 70], 'color': "#FFFFE0"},
+    #             {'range': [70, 100], 'color': "#90EE90"}
+    #         ],
+    #              'threshold' : {'line': {'color': "red", 'width': 4}, 'thickness': 0.75, 'value': 100}}))
     
-    fig.update_layout(width=600, height=400)  # Adjust the width and height as desired
-    fig.show()
+    # fig.update_layout(width=600, height=400)  # Adjust the width and height as desired
+    # fig.show()
     
     
     def on_button_click(app, form):
